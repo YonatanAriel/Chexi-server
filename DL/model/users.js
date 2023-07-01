@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
     // playlists: [{
     //     type :String
     // }],
-    favoritArtist:[{
+    favoriteArtists:[{
         type:String
     }],
     isActive :{

@@ -8,9 +8,9 @@ const songsSchema = new mongoose.Schema({
     videoId: {
         type:String,
         require:true,
-        unique:true,
+        // unique:true,
     },
-    somgImg: {
+    songImg: {
         type:String,
         require:true
     },

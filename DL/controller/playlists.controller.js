@@ -7,7 +7,7 @@ async function create(data) {
     return await playlistsModel.find(filter).populate("songsId")
   }
   async function readOne(filter) {
-    return await playlistsModel.findOne(filter);
+    return await playlistsModel.findOne(filter).populate("songsId");
   }
   async function update(filter, data){
     return await playlistsModel.updateOne(filter, data);

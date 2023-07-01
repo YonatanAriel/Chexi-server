@@ -3,13 +3,13 @@ const mongoose = require("mongoose");
 const playlistsSchema = new mongoose.Schema({
     name: {
         type:String,
-        require: true
+        require: true,
+        minlength:1
     },
     userId: {
         type:mongoose.Schema.Types.ObjectId,
         ref:"users",
-        require: true
-        // require:true
+        // require: true
     },
     // img: {
     //     // type :String,?
@@ -19,7 +19,7 @@ const playlistsSchema = new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref: "songs"
     }],
-    isFavorit: {
+    isFavorite: {
         type: Boolean,
         default: false
     }

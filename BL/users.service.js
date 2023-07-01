@@ -18,4 +18,8 @@ async function register(userData) {
     await userController.create(userData);
     return userData
 }
-module.exports = {getAllUsers, register}
+async function addFavoriteArtist(userId, artistName){
+    const newArtist = userController.update({_id: userId }, { $push: {favoriteArtists: artistName}})
+    return "New artist added - " + artistName
+}
+module.exports = {getAllUsers, register, addFavoriteArtist}

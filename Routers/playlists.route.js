@@ -39,4 +39,25 @@ router.get("/user/:userid", async (req, res) => {
         res.status(400).send(err)
     }
 })
+router.post("/likedsongs" , async (req, res) => {
+    try{
+        const likesSongsPlaylist = await playlistServices.getLikedSongsPlaylist(req.body.userId)
+        res.send(likesSongsPlaylist)
+    }
+    catch(err){
+        res.status(400).send(err)
+    }
+})
+router.post("/deletesong/:playlistid", async (req, res) => {
+    try{
+        const playlistId = req.params.playlistid;
+        const songId = req.body.id;
+        const updatedPlaylist = await playlistServices.deleteSongFromPlaylist(playlistId, songId)
+        res.send(updatedPlaylist)
+        //need to delete / isAcrive: false the song from songs (only if it doesnt in any other playlists)
+    }
+    catch(err){
+        res.status(400).send(err)
+    }
+})
 module.exports = router

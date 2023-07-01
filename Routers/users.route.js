@@ -20,6 +20,17 @@ router.post("/register", async (req, res) => {
         res.status(400).send(err);
     }
 })
+router.post("/addfavoriteartist", async (req, res) => {
+    try{
+        const artistName = req.body.artistName
+        const userId = req.body.userId
+        const newArtist = await usersServices.addFavoriteArtist(userId, artistName)
+        res.send(newArtist)
+    }
+    catch(err){
+        res.status(400).send(err)
+    }
+})
 module.exports = router;
 
 

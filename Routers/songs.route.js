@@ -11,6 +11,15 @@ router.get("/" , async (req, res) => {
         res.status(400).send(err)
     }
 })
+router.get("/getsong/:videoid", async (req, res) => {
+    try{
+        const song = await songsServices.getSong({videoId: req.params.videoid})
+        res.send(song)
+    }
+    catch(err){
+        res.status(400).send(err)
+    }
+})
 // router.post("/", async (req, res) => {
 //     try{
 //         const newSong = await songsServices.addSong(req.body)
