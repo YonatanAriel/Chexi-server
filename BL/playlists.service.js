@@ -7,18 +7,18 @@ async function getAllplaylists() {
   return allPlaylists;
 }
 //need to pass idFavorit: true if the playlist is liked songs
-async function addPlaylist(data) {
-  if(data.name.trim().length < 1 || !data.userId) throw "Missing data"
-  if(data.isFavorite === true){
-    const isLikedSongsPlaylistExist = await getLikedSongsPlaylist(data.userId)
+async function addPlaylist(playlistData, userName) {
+  if(playlistData.name.trim().length < 1 || !userName) throw "Missing data"
+  if(playlistData.isFavorite === true){
+    const isLikedSongsPlaylistExist = await getLikedSongsPlaylist(userName)
     if(isLikedSongsPlaylistExist)  return isLikedSongsPlaylistExist
   }
   // why is that ruin the request?
-  const newPlaylist = await playlistsController.create(data);
+  const newPlaylist = await playlistsController.create({...playlistData, userName: userName});
   return newPlaylist
 }
-async function getPlaylistsByUserId(userId) {
-  const playlists = await playlistsController.read({ userId: userId });
+async function getPlaylistsByUserName(userName) {
+  const playlists = await playlistsController.read({ userName: userName });
   if (!playlists) throw "No playlists found";
   return playlists;
 }
@@ -33,10 +33,10 @@ async function addSongToPlaylist(songData, playlistId) {
   if (!playlist.songsId?.find(song => song._id.toString() == songId.toString())) {
      await playlistsController.update({ _id: playlistId },{ $push: {songsId: songId}});
   } 
-  return songData
+  return {...songData, _id: songId}
 }
-async function getLikedSongsPlaylist(userId) {
-  const LikedSongsPlaylist = await playlistsController.readOne({ userId: userId, isFavorite: true })
+async function getLikedSongsPlaylist(userName) {
+  const LikedSongsPlaylist = await playlistsController.readOne({ userName: userName, isFavorite: true })
   return LikedSongsPlaylist
 }
 async function deleteSongFromPlaylist(playlistId, songId){
@@ -50,10 +50,10 @@ async function deleteSongFromPlaylist(playlistId, songId){
 }
 module.exports = {
   addSongToPlaylist,
-  getPlaylistsByUserId,
   getPlaylistById,
   addPlaylist,
   getAllplaylists,
   getLikedSongsPlaylist,
-  deleteSongFromPlaylist
+  deleteSongFromPlaylist,
+  getPlaylistsByUserName
 };

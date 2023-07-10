@@ -6,8 +6,8 @@ async function create(data) {
 async function read(filter = {}) {
   return await usersModel.find(filter);
 }
-async function readOne(filter) {
-  return await usersModel.findOne(filter);
+async function readOne(filter, select) {
+  return await usersModel.findOne(filter, select);
 }
 async function update(filter, data){
   return await usersModel.updateOne(filter, data);

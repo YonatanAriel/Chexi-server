@@ -1,6 +1,8 @@
+
 const express = require("express"),
 router = express.Router(),
 usersServices = require("../BL/users.service");
+const {verify} = require("../auth")
 
 router.get("/", async (req, res) => {
     try{
@@ -13,18 +15,27 @@ router.get("/", async (req, res) => {
 })
 router.post("/register", async (req, res) => {
     try{
-        const newUser = await usersServices.register(req.body);
-        res.send(newUser);
+        const token = await usersServices.register(req.body);
+        res.send(token);
     }
     catch(err){
         res.status(400).send(err);
     }
 })
-router.post("/addfavoriteartist", async (req, res) => {
+router.post("/login", async (req, res) => {
+    try{
+        const token = await usersServices.login(req.body)
+        res.send(token)
+    }
+    catch(err){
+        res.status(400).send(err)
+    }
+})
+router.post("/addfavoriteartist",verify, async (req, res) => {
     try{
         const artistName = req.body.artistName
-        const userId = req.body.userId
-        const newArtist = await usersServices.addFavoriteArtist(userId, artistName)
+        const userName = req.userName
+        const newArtist = await usersServices.addFavoriteArtist(userName, artistName)
         res.send(newArtist)
     }
     catch(err){
@@ -32,6 +43,12 @@ router.post("/addfavoriteartist", async (req, res) => {
     }
 })
 module.exports = router;
+
+router.post("/test",verify,(req,res)=>{
+    res.send('ok')
+})
+module.exports = router;
+
 
 
 

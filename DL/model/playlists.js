@@ -6,6 +6,9 @@ const playlistsSchema = new mongoose.Schema({
         require: true,
         minlength:1
     },
+    userName: {
+        type: String
+    },
     userId: {
         type:mongoose.Schema.Types.ObjectId,
         ref:"users",
