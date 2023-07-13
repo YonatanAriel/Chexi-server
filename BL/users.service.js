@@ -26,8 +26,12 @@ async function login(data) {
     const token = createToken({userName: user.userName})
     return token
 }
+async function getFavoriteArtists(userName){
+    const user = await userController.readOne({userName: userName})
+    return user.favoriteArtists
+}
 async function addFavoriteArtist(userName, artistName){
     const newArtist = await userController.update({userName: userName}, { $push: {favoriteArtists: artistName}})
     return "New artist added - " + artistName
 }
-module.exports = {getAllUsers, register, login, addFavoriteArtist}
+module.exports = {getAllUsers, register, login, addFavoriteArtist, getFavoriteArtists}

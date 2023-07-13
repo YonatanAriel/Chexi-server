@@ -31,6 +31,15 @@ router.post("/login", async (req, res) => {
         res.status(400).send(err)
     }
 })
+router.get("/getfavoritartists", verify, async (req, res) => {
+    try{
+        const artists = await usersServices.getFavoriteArtists(req.userName)
+        res.send(artists)
+    }
+    catch(err){
+        res.status(400).send(err)
+    }
+})
 router.post("/addfavoriteartist",verify, async (req, res) => {
     try{
         const artistName = req.body.artistName
