@@ -56,7 +56,6 @@ router.post("/deletesong/:playlistid" ,verify ,async (req, res) => {
     try{
         const playlistId = req.params.playlistid;
         const songId = req.body.id;
-        console.log(songId);
         const updatedPlaylist = await playlistServices.deleteSongFromPlaylist(playlistId, songId)
         res.send({songId: req.body.id, msg: updatedPlaylist})
         //need to delete / isAcrive: false the song from songs (only if it doesnt in any other playlists)

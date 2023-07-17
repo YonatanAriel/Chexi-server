@@ -43,8 +43,9 @@ router.get("/getfavoritartists", verify, async (req, res) => {
 router.post("/addfavoriteartist",verify, async (req, res) => {
     try{
         const artistName = req.body.artistName
+        const artistImg = req.body.artistImg
         const userName = req.userName
-        const newArtist = await usersServices.addFavoriteArtist(userName, artistName)
+        const newArtist = await usersServices.addFavoriteArtist(userName, artistName, artistImg)
         res.send(newArtist)
     }
     catch(err){

@@ -3,21 +3,26 @@ const mongoose = require("mongoose");
 const userSchema = new mongoose.Schema({
     userName: {
         type:String,
-        require:true,
+        required:true,
         unique:true,
         minlength: 3
     },
     password: {
         type: String,
-        require: true,
+        required: true,
         select: false,
         minlength: 6
     },
     // playlists: [{
     //     type :String
     // }],
-    favoriteArtists:[{
-        type:String
+    favoriteArtists: [{
+        name:{
+            type: String
+        },
+        img: {
+            type: String
+        }
     }],
     isActive :{
         type:Boolean,

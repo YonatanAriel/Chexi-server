@@ -8,14 +8,12 @@ const createToken = (data) => {
 async function verify(req, res, next){
     try{
         const token = req?.headers?.authorization?.split("Bearer ")[1]
-        console.log(token);
         const decodedToken = jwt.verify(token, process.env.SECRET)
         if(!decodedToken) throw "invalid token"
         req.userName = decodedToken.userName
         next()
     }
     catch(err){
-        console.log(err);
         return res.status(401).send("Invalid token");   
      }
 }

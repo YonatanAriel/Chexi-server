@@ -30,8 +30,9 @@ async function getFavoriteArtists(userName){
     const user = await userController.readOne({userName: userName})
     return user.favoriteArtists
 }
-async function addFavoriteArtist(userName, artistName){
-    const newArtist = await userController.update({userName: userName}, { $push: {favoriteArtists: artistName}})
+async function addFavoriteArtist(userName, artistName, artistImg){
+    const newArtist = await userController.update({userName: userName},{ $push: { favoriteArtists: { name: artistName, img: artistImg} } })
+        //  { $push: {favoriteArtists: artistName}})
     return "New artist added - " + artistName
 }
 module.exports = {getAllUsers, register, login, addFavoriteArtist, getFavoriteArtists}
