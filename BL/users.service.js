@@ -6,6 +6,7 @@ async function getAllUsers(filter){
     const allUsers = await userController.read(filter);
     return allUsers
 }
+
 async function register(data) {
     if(!data.userName || !data.password ) throw "Missing data"
     const isUserAlreadyExist = await userController.readOne({userName: data.userName})
@@ -17,6 +18,7 @@ async function register(data) {
     const token = createToken({userName: newUser.userName})
     return token
 }
+
 async function login(data) {
     if(!data.userName || !data.password) throw "Missing data"
     const user = await userController.readOne({userName: data.userName}, "+password")
@@ -26,13 +28,14 @@ async function login(data) {
     const token = createToken({userName: user.userName})
     return token
 }
+
 async function getFavoriteArtists(userName){
     const user = await userController.readOne({userName: userName})
     return user.favoriteArtists
 }
+
 async function addFavoriteArtist(userName, artistName, artistImg){
     const newArtist = await userController.update({userName: userName},{ $push: { favoriteArtists: { name: artistName, img: artistImg} } })
-        //  { $push: {favoriteArtists: artistName}})
     return "New artist added - " + artistName
 }
 module.exports = {getAllUsers, register, login, addFavoriteArtist, getFavoriteArtists}

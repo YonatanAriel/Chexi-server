@@ -13,9 +13,6 @@ const userSchema = new mongoose.Schema({
         select: false,
         minlength: 6
     },
-    // playlists: [{
-    //     type :String
-    // }],
     favoriteArtists: [{
         name:{
             type: String
@@ -29,13 +26,6 @@ const userSchema = new mongoose.Schema({
         default:true
     }
 })
-        // type:[String],
-        // validate: {
-        //     validator: function (value) {
-        //         return Array.isArray(value);
-        //     },
-        //     message: "favoritArtist field must be an array"
-        // }
 
 const usersModel = mongoose.model("users", userSchema);
 module.exports = usersModel;

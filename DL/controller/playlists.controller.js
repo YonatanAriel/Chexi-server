@@ -8,8 +8,6 @@ async function create(data) {
   }
   async function readOne(filter) {
     return await playlistsModel.findOne(filter).populate("songsId")
-    // const query = await playlistsModel.findOne(filter)
-    // return await (populate? query.populate("songsId") : query)
   }
   async function update(filter, data){
     return await playlistsModel.updateOne(filter, data);
@@ -17,4 +15,5 @@ async function create(data) {
   async function del(id){
     return await update(id, {isActive:false})
   }
+  
   module.exports = { create, read, readOne, update, del};

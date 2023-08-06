@@ -13,6 +13,7 @@ router.get("/", async (req, res) => {
         res.status(400).send(err);
     }
 })
+
 router.post("/register", async (req, res) => {
     try{
         const token = await usersServices.register(req.body);
@@ -22,6 +23,7 @@ router.post("/register", async (req, res) => {
         res.status(400).send(err);
     }
 })
+
 router.post("/login", async (req, res) => {
     try{
         const token = await usersServices.login(req.body)
@@ -31,6 +33,7 @@ router.post("/login", async (req, res) => {
         res.status(400).send(err)
     }
 })
+
 router.get("/getfavoritartists", verify, async (req, res) => {
     try{
         const artists = await usersServices.getFavoriteArtists(req.userName)
@@ -40,6 +43,7 @@ router.get("/getfavoritartists", verify, async (req, res) => {
         res.status(400).send(err)
     }
 })
+
 router.post("/addfavoriteartist",verify, async (req, res) => {
     try{
         const artistName = req.body.artistName
@@ -52,12 +56,9 @@ router.post("/addfavoriteartist",verify, async (req, res) => {
         res.status(400).send(err)
     }
 })
+
 module.exports = router;
 
-router.post("/test",verify,(req,res)=>{
-    res.send('ok')
-})
-module.exports = router;
 
 
 

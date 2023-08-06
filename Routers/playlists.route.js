@@ -13,6 +13,7 @@ router.get("/", async (req, res) => {
         res.status(400).send(err)
     }
 })
+
 router.post("/addplaylist", verify, async (req, res) => {
     try{
         const newPlaylist = await playlistServices.addPlaylist(req.body, req.userName)
@@ -21,6 +22,7 @@ router.post("/addplaylist", verify, async (req, res) => {
         res.status(400).send(err)
     }
 })
+
 router.post("/addsong/:playlistid" ,verify , async (req, res) => {
     try{
         const songData = req.body;
@@ -32,10 +34,9 @@ router.post("/addsong/:playlistid" ,verify , async (req, res) => {
         res.status(400).send(err)
     }
 })
+
 router.get("/user",verify ,async (req, res) => {
     try{
-        // const userId = req.params.userid
-        // const playlists = await playlistServices.getPlaylistsByUserId(userId)
         const userName = req.userName
         const playlists = await playlistServices.getPlaylistsByUserName(userName)
         res.send(playlists)
@@ -43,6 +44,7 @@ router.get("/user",verify ,async (req, res) => {
         res.status(400).send(err)
     }
 })
+
 router.get("/likedsongs" ,verify ,async (req, res) => {
     try{
         const likesSongsPlaylist = await playlistServices.getLikedSongsPlaylist(req.userName)
@@ -52,16 +54,17 @@ router.get("/likedsongs" ,verify ,async (req, res) => {
         res.status(400).send(err)
     }
 })
+
 router.post("/deletesong/:playlistid" ,verify ,async (req, res) => {
     try{
         const playlistId = req.params.playlistid;
         const songId = req.body.id;
         const updatedPlaylist = await playlistServices.deleteSongFromPlaylist(playlistId, songId)
         res.send({songId: req.body.id, msg: updatedPlaylist})
-        //need to delete / isAcrive: false the song from songs (only if it doesnt in any other playlists)
     }
     catch(err){
         res.status(400).send(err)
     }
 })
+
 module.exports = router

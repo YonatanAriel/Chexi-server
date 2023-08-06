@@ -12,12 +12,7 @@ const playlistsSchema = new mongoose.Schema({
     userId: {
         type:mongoose.Schema.Types.ObjectId,
         ref:"users",
-        // require: true
     },
-    // img: {
-    //     // type :String,?
-    //     // default?
-    // },
     songsId: [{
         type:mongoose.Schema.Types.ObjectId,
         ref: "songs"
@@ -27,5 +22,6 @@ const playlistsSchema = new mongoose.Schema({
         default: false
     }
 })
+
 const playlistsModel = mongoose.model("playlists", playlistsSchema);
 module.exports = playlistsModel;

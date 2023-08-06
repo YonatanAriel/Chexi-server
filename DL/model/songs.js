@@ -8,7 +8,6 @@ const songsSchema = new mongoose.Schema({
     videoId: {
         type:String,
         require:true,
-        // unique:true,
     },
     songImg: {
         type:String,
@@ -31,5 +30,6 @@ const songsSchema = new mongoose.Schema({
         require:true
     }
 })
+
 const songsModel = mongoose.model("songs", songsSchema);
 module.exports = songsModel;

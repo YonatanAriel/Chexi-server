@@ -15,5 +15,6 @@ async function create(data) {
   async function del(id){
     return await update(id, {isActive:false})
   }
+  
   module.exports = { create, read, readOne, update, del};
   
