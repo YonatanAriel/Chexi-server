@@ -7,8 +7,8 @@ Welcome to the backend of the "chexi" project. This README provides an overview 
 The "chexi" backend is organized into several key directories and components:
 
 - **DL (Data Layer):** This directory contains everything related to data storage and database connectivity.
-  - **connect.js:** This file establishes a connection to the MongoDB database.
-  - **models:** This folder holds the data models for your application.
+  - **db.js:** This file establishes a connection to the MongoDB database.
+  - **model:** This folder holds the data models for the application.
   - **controller:** This folder exposes CRUD (Create, Read, Update, Delete) operations for the services.
 
 - **BL (Business Logic):** The BL directory houses the business logic and core functionality of the project.
@@ -35,9 +35,8 @@ To run the "chexi" backend, follow these steps:
 
 - in DL > db.js: replace MONGO_URL with MongoDB connection string you've created.
 - in auth.js: replace (all) SECRET with the same random text you want.
-- in BL > users.service.js: replace SALT_ROUNDS with the number 9.
+- in BL > users.service.js: replace SALT_ROUNDS with the number 10.
 - in index.js: replace PORT with the number 5000.
-  
   
 3. **Install Dependencies:**
 
