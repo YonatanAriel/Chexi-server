@@ -12,14 +12,14 @@ The "chexi" backend is organized into several key directories and components:
   - **controller:** This folder exposes CRUD (Create, Read, Update, Delete) operations for the services.
 
 - **BL (Business Logic):** The BL directory houses the business logic and core functionality of the project.
-  - This is where all the logic and functions of your application reside.
+  - This is where all the logic and functions of the application reside.
 
 - **Routers:** In the Routers directory, you'll find route definitions for various models.
   - For example, "users.route.js," "playlists.route.js," and "songs.route.js" define routes for the respective entities.
 
 - **Root Files:**
   - **auth.js:** This file in the project's root is dedicated to authentication.
-  - **index.js:** The main entry point of your backend.
+  - **index.js:** The main entry point of the backend.
     - It connects to the database, configures the Express server, and defines routes for different models.
 
 ## Getting Started
